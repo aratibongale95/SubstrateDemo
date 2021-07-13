@@ -3694,6 +3694,7 @@ dependencies = [
  "pallet-aura",
  "pallet-balances",
  "pallet-calculator",
+ "pallet-findlarger",
  "pallet-grandpa",
  "pallet-randomness-collective-flip",
  "pallet-store",
@@ -3914,6 +3915,20 @@ dependencies = [
 
 [[package]]
 name = "pallet-calculator"
+version = "3.0.0"
+dependencies = [
+ "frame-benchmarking",
+ "frame-support",
+ "frame-system",
+ "parity-scale-codec",
+ "serde",
+ "sp-core",
+ "sp-io",
+ "sp-runtime",
+]
+
+[[package]]
+name = "pallet-findlarger"
 version = "3.0.0"
 dependencies = [
  "frame-benchmarking",

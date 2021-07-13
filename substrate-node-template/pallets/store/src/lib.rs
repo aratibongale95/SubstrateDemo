@@ -120,8 +120,7 @@ pub mod pallet {
 
 		#[pallet::weight(10_000 + T::DbWeight::get().reads_writes(1,1))]	
 		  pub fn store_details(origin: OriginFor<T>, id: u64, name: Vec<u8>, designation: Vec<u8>) -> DispatchResult {
-			   // We use this to make sure that this is a signed message
-			   // and that a user will be charged a transaction fee.
+			  
 			   let sender = ensure_signed(origin)?;
 			
 			   <EmpID<T>>::put(id);

@@ -55,6 +55,7 @@ std = [
     'sp-version/std',
     'pallet-store/std',
     'pallet-calculator/std',
+    'pallet-findlarger/std',
 ]
 [dependencies.codec]
 default-features = false
@@ -147,6 +148,11 @@ version = '3.0.0'
 [dependencies.pallet-calculator]
 default-features = false
 path = '../pallets/calculator'
+version = '3.0.0'
+
+[dependencies.pallet-findlarger]
+default-features = false
+path = '../pallets/findlarger'
 version = '3.0.0'
 
 

@@ -58,12 +58,9 @@ pub mod pallet {
 		/// Event documentation should end with an array that provides descriptive names for event
 		/// parameters. [something, who]
 		SomethingStored(u32, T::AccountId),
-        Addition(T::AccountId, u64, u64, u64),
-        Substraction(T::AccountId, u64, u64, u64),
-        Multiplication(T::AccountId, u64, u64, u64),
-        Division(T::AccountId, u64, u64, u64),
-		Modulo(T::AccountId, u64, u64, u64),
-		Power(T::AccountId, u64, u32, u64),
+        LargerBetweenThree(T::AccountId, u64, u64, u64, u64),
+		LargerBetweenTwo(T::AccountId, u64, u64, u64),
+       
 	}
 
 	// Errors inform users that something went wrong.
@@ -77,11 +74,11 @@ pub mod pallet {
 
 	// Dispatchable functions allows users to interact with the pallet and invoke state changes.
 	// These functions materialize as "extrinsics", which are often compared to transactions.
-	// Dispatchable functions must be annotated with num1 weight and must return num1 DispatchResult.
+	// Dispatchable functions must be annotated with a weight and must return a DispatchResult.
 	#[pallet::call]
 	impl<T:Config> Pallet<T> {
-		/// An example dispatchable that takes num1 singles value as num1 parameter, writes the value to
-		/// storage and emits an event. This function must be dispatched by num1 signed extrinsic.
+		/// An example dispatchable that takes a singles value as a parameter, writes the value to
+		/// storage and emits an event. This function must be dispatched by a signed extrinsic.
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1))]
 		pub fn do_something(origin: OriginFor<T>, something: u32) -> DispatchResult {
 			// Check that the extrinsic was signed and get the signer.
@@ -94,16 +91,16 @@ pub mod pallet {
 
 			// Emit an event.
 			Self::deposit_event(Event::SomethingStored(something, who));
-			// Return num1 successful DispatchResultWithPostInfo
+			// Return a successful DispatchResultWithPostInfo
 			Ok(())
 		}
 
-		/// An example dispatchable that may throw num1 custom error.
+		/// An example dispatchable that may throw a custom error.
 		#[pallet::weight(10_000 + T::DbWeight::get().reads_writes(1,1))]
 		pub fn cause_error(origin: OriginFor<T>) -> DispatchResult {
 			let _who = ensure_signed(origin)?;
 
-			// Read num1 value from storage.
+			// Read a value from storage.
 			match <Something<T>>::get() {
 				// Return an error if the value has not been set.
 				None => Err(Error::<T>::NoneValue)?,
@@ -117,69 +114,45 @@ pub mod pallet {
 			}
 		}
 
-	   // This function is for to add two numbers
+		//This function is to find out large numbers between 3
 	   #[pallet::weight(10_000 + T::DbWeight::get().reads_writes(1,1))]	
-       pub fn add(origin: OriginFor<T>, num1: u64, num2: u64) -> DispatchResult {
+       pub fn find_larger_between_three(origin: OriginFor<T>, num1: u64, num2: u64, num3: u64) -> DispatchResult {
+
             let sender = ensure_signed(origin)?;
-            let result = num1.checked_add(num2).ok_or("Numbers are too large to store")?;
-            <FinalResult<T>>::put(result);
-            Self::deposit_event(Event::Addition(sender, num1, num2, result));
+            let mut larger;
+
+			if num1 > num2 && num1 > num3 {
+				larger = num1;
+			}
+			else if num2 > num1 && num2 > num3 {
+				larger = num2;
+			}
+			else {
+				larger = num3;
+			}
+            <FinalResult<T>>::put(larger);
+            Self::deposit_event(Event::LargerBetweenThree(sender, num1, num2, num3, larger));
             Ok(())
         }
 
-		 // This function is for to substract two numbers
+		//This function is to find out large numbers between 2
 		#[pallet::weight(10_000 + T::DbWeight::get().reads_writes(1,1))]	
-		pub fn sub(origin: OriginFor<T>, num1: u64, num2: u64) -> DispatchResult {
+		pub fn find_larger_between_two(origin: OriginFor<T>, num1: u64, num2: u64) -> DispatchResult {
+			
 			 let sender = ensure_signed(origin)?;
-			 let result = num1.checked_sub(num2).ok_or("Numbers are too large to store")?;
-			 <FinalResult<T>>::put(result);
-			 Self::deposit_event(Event::Substraction(sender, num1, num2, result));
+			 let mut larger;
+ 
+			 if num1 > num2  {
+				 larger = num1;
+			 }
+			 else {
+				 larger = num2;
+			 }
+			 <FinalResult<T>>::put(larger);
+			 Self::deposit_event(Event::LargerBetweenTwo(sender, num1, num2,  larger));
 			 Ok(())
 		 }
-
-		  // This function is for to multiply two numbers
-		 #[pallet::weight(10_000 + T::DbWeight::get().reads_writes(1,1))]	
-		 pub fn mul(origin: OriginFor<T>, num1: u64, num2: u64) -> DispatchResult {
-			  let sender = ensure_signed(origin)?;
-			  let result = num1.checked_mul(num2).ok_or("Numbers are too large to store")?;
-			  <FinalResult<T>>::put(result);
-			  Self::deposit_event(Event::Multiplication(sender, num1, num2, result));
-			  Ok(())
-		  }
-
-		   // This function is for to divide two numbers
-		  #[pallet::weight(10_000 + T::DbWeight::get().reads_writes(1,1))]	
-		  pub fn div(origin: OriginFor<T>, num1: u64, num2: u64) -> DispatchResult {
-			   let sender = ensure_signed(origin)?;
-			   let result = num1.checked_div(num2).ok_or("Numbers are too large to store")?;
-			   <FinalResult<T>>::put(result);
-			   Self::deposit_event(Event::Division(sender, num1, num2, result));
-			   Ok(())
-		   }
-
-		    // This function is for to find out remainder 
-		   #[pallet::weight(10_000 + T::DbWeight::get().reads_writes(1,1))]	
-		  pub fn modulo(origin: OriginFor<T>, num1: u64, num2: u64) -> DispatchResult {
-			   let sender = ensure_signed(origin)?;
-			   let result = num1.checked_rem(num2).ok_or("Numbers are too large to store")?;
-			   <FinalResult<T>>::put(result);
-			   Self::deposit_event(Event::Modulo(sender, num1, num2, result));
-			   Ok(())
-		   }
-
-		      // This function is for to find out power of a number 
-		   #[pallet::weight(10_000 + T::DbWeight::get().reads_writes(1,1))]	
-		  pub fn pow(origin: OriginFor<T>, num1: u64, num2: u32) -> DispatchResult {
-			   let sender = ensure_signed(origin)?;
-			   let result = num1.checked_pow(num2).ok_or("Numbers are too large to store in num1 u64")?;
-			   <FinalResult<T>>::put(result);
-			   Self::deposit_event(Event::Power(sender, num1, num2, result));
-			   Ok(())
-		   }
-
-		  
-
-
+	
 	}
 }
 

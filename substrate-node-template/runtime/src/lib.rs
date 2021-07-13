@@ -46,6 +46,9 @@ pub use pallet_store;
 
 pub use pallet_calculator;
 
+pub use pallet_findlarger;
+
+
 /// An index to a block.
 pub type BlockNumber = u32;
 
@@ -276,6 +279,11 @@ impl pallet_calculator::Config for Runtime {
 	type Event = Event;
 }
 
+/// Configure the pallet-template in pallets/template.
+impl pallet_findlarger::Config for Runtime {
+	type Event = Event;
+}
+
 
 /// Configure the pallet-template in pallets/template.
 impl pallet_store::Config for Runtime {
@@ -305,6 +313,7 @@ construct_runtime!(
 		Calculator: pallet_calculator::{Pallet, Call, Storage, Event<T>},
 		StoreDetails: pallet_store::{Pallet, Call, Storage, Event<T>},
 		TemplateModule: pallet_template::{Pallet, Call, Storage, Event<T>},
+		FindLarger: pallet_findlarger::{Pallet, Call, Storage, Event<T>},
 	}
 );
 
