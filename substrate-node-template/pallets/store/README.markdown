@@ -47,19 +47,17 @@ and include it in your `construct_runtime!` macro:
 ```rust
 StoreDetails: pallet_store::{Pallet, Call, Storage, Event<T>},
 ```
-### How to add two numbers and verify the result
+### How to store employee details
 
 * After executing `node-template --dev`, Use this link to open the Polkadot JS Apps UI `https://polkadot.js.org/apps/#/explorer?rpc=ws://127.0.0.1:9944`
   
-* Open Extrinsics and select the calculator pallet then select add function and provide 2 input values.
- ![img.png](img.png)
+* Open Extrinsics and select the storeDetails pallet then select storeDetails function and provide id, name & designation of an employee.
+ ![img6.png](img6.png)
 
-* Click on `Submit Transaction` and addition will be performed.
- ![img1.png](img1.png)
+* Click on `Submit Transaction` and employee details will be stored.
+ ![img7.png](img7.png)
 
-* To verify the result open Chain state and select the calculator pallet after that select finalResult then click on `+` sign.
- ![img2.png](img2.png)
-
-Like the same way you can try other functions !!!.
+* To check the values are getting stored in a variable or not. Open Chain state and select the storeDetails pallet after that select id or name or designation then click on `+` sign.
+ ![img8.png](img8.png)
 
 
