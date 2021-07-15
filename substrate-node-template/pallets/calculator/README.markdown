@@ -66,6 +66,6 @@ Calculator: pallet_calculator::{Pallet, Call, Storage, Event<T>},
 * To verify the result open Chain state and select the calculator pallet after that select finalResult then click on `+` sign.
  ![img2.png](img2.png)
 
-Like the same way you can try other functions!!!.
+Like the same way you can try other functions !!!.
 
 
