@@ -36,9 +36,10 @@ std = [
 You should implement it's trait like so:
 
 ```rust
-impl pallet_calculator::Config for Runtime {
+impl pallet_findlarger::Config for Runtime {
 	type Event = Event;
 }
+
 ```
 
 and include it in your `construct_runtime!` macro:
