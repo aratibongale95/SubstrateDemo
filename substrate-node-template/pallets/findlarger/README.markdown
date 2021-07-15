@@ -2,7 +2,7 @@
 ### FindLarger Pallet
 
 In this pallet we find out large number between 3 numbers and 2 numbers. For that we create two function; As per our requirement we can select either findLargerBetweenThree()
-or findLargerBetweenTwo()
+or findLargerBetweenTwo().
 ### Traits
 
 This pallet depends on on the [FRAME EnsureOrigin System trait]
