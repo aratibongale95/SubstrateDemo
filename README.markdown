@@ -9,20 +9,23 @@ First, complete the basic [Rust setup instructions](https://www.rust-lang.org/to
 
 ### Run
 Use Rust's native cargo command to build and launch the template node:
-
+```sh
 cargo run --release -- --dev --tmp
+```
 ### Build
 The cargo run command will perform an initial build. Use the following command to build the node without launching it:
-
+```sh
 cargo build --release
-
+```
 
 ### Run
 The provided cargo run command will launch a temporary node and its state will be discarded after you terminate the process. After the project has been built, there are other ways to launch the node.
 
 This command will start the single-node development chain with persistent state:
 
+```sh
 ./target/release/node-template --dev
+```
 
 ## Connect with Polkadot-JS Apps Front-end
 Once the node template is running locally, you can connect it with Polkadot-JS Apps front-end to interact with your chain. [Click here](https://polkadot.js.org/apps/#/explorer?rpc=ws://127.0.0.1:9944) connecting the Apps to your local node template.
@@ -45,7 +48,9 @@ chain_spec.rs: A chain specification is a source code file that defines a Substr
 service.rs: This file defines the node implementation. Take note of the libraries that this file imports and the names of the functions it invokes. In particular, there are references to consensus-related topics, such as the longest chain rule, the Aura block authoring mechanism and the GRANDPA finality gadget.
 After the node has been built, refer to the embedded documentation to learn more about the capabilities and configuration parameters that it exposes:
 
+```sh
 ./target/release/node-template --help
+```
 
 ### Runtime
 In Substrate, the terms "runtime" and "state transition function" are analogous - they refer to the core logic of the blockchain that is responsible for validating blocks and executing the state changes they define. The Substrate project in this repository uses the FRAME framework to construct a blockchain runtime. FRAME allows runtime developers to declare domain-specific logic in modules called "pallets". At the heart of FRAME is a helpful macro language that makes it easy to create pallets and flexibly compose them to create blockchains that can address a variety of needs.
