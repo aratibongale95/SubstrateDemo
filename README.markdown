@@ -34,11 +34,14 @@ A Substrate project such as this consists of a number of components that are spr
 A blockchain node is an application that allows users to participate in a blockchain network. Substrate-based blockchain nodes expose a number of capabilities:
 
 Networking: Substrate nodes use the libp2p networking stack to allow the nodes in the network to communicate with one another.
+
 Consensus: Blockchains must have a way to come to consensus on the state of the network. Substrate makes it possible to supply custom consensus engines and also ships with several consensus mechanisms that have been built on top of Web3 Foundation research.
+
 RPC Server: A remote procedure call (RPC) server is used to interact with Substrate nodes.
 There are several files in the node directory - take special note of the following:
 
 chain_spec.rs: A chain specification is a source code file that defines a Substrate chain's initial (genesis) state. Chain specifications are useful for development and testing, and critical when architecting the launch of a production chain. Take note of the development_config and testnet_genesis functions, which are used to define the genesis state for the local development chain configuration. These functions identify some well-known accounts and use them to configure the blockchain's initial state.
+
 service.rs: This file defines the node implementation. Take note of the libraries that this file imports and the names of the functions it invokes. In particular, there are references to consensus-related topics, such as the longest chain rule, the Aura block authoring mechanism and the GRANDPA finality gadget.
 After the node has been built, refer to the embedded documentation to learn more about the capabilities and configuration parameters that it exposes:
 
@@ -58,7 +61,11 @@ The runtime in this project is constructed using many FRAME pallets that ship wi
 A FRAME pallet is compromised of a number of blockchain primitives:
 
 Storage: FRAME defines a rich set of powerful storage abstractions that makes it easy to use Substrate's efficient key-value database to manage the evolving state of a blockchain.
+
 Dispatchables: FRAME pallets define special types of functions that can be invoked (dispatched) from outside of the runtime in order to update its state.
+
 Events: Substrate uses events to notify users of important changes in the runtime.
+
 Errors: When a dispatchable fails, it returns an error.
+
 Config: The Config configuration interface is used to define the types and parameters upon which a FRAME pallet depends.
