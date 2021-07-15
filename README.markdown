@@ -1,5 +1,8 @@
 # Substrate Node Template
 In this repository, Here we build 3 pallets
+* Calculator: This pallet is build to perform Basic arithmatic operations.
+* Store: This pallet is build to store employee details.
+* FindLarge: This pallet is build to find out the larger number between 3 or 2 numbers.
 
 ## Rust Setup
 First, complete the basic [Rust setup instructions](https://www.rust-lang.org/tools/install).
